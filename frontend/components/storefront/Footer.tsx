@@ -22,8 +22,8 @@ const staticLinks = {
 
 const socials = [
   { label: 'Instagram', href: '#', icon: 'IG' },
-  { label: 'Twitter',   href: '#', icon: 'TW' },
-  { label: 'Facebook',  href: '#', icon: 'FB' },
+  { label: 'Twitter', href: '#', icon: 'TW' },
+  { label: 'Facebook', href: '#', icon: 'FB' },
 ]
 
 export default function Footer({ categories = [] }: { categories?: Category[] }) {

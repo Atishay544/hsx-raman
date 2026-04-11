@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter, usePathname } from 'next/navigation'
 import { ShoppingCart, Heart, Search, User, Menu, X, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -36,8 +37,9 @@ export default function Header({ categories }: { categories: any[] }) {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="text-lg font-extrabold tracking-tight text-gray-900 shrink-0 hover:text-indigo-600 transition-colors duration-200">
-            HighStreetExpress
+          <Link href="/" className="flex items-center gap-2 shrink-0 hover:opacity-80 transition-opacity duration-200">
+            <Image src="/hsx.jpeg" alt="HighStreetExpress Logo" width={40} height={40} priority className="rounded" />
+            <span className="hidden sm:inline text-lg font-extrabold tracking-tight text-gray-900">HighStreetExpress</span>
           </Link>
 
           {/* Category nav (desktop) */}
@@ -50,8 +52,8 @@ export default function Header({ categories }: { categories: any[] }) {
                     href={`/category/${cat.slug}`}
                     prefetch={false}
                     className={`relative px-3 py-2 text-sm font-medium flex items-center gap-0.5 rounded-lg transition-colors duration-200 ${isActive
-                        ? 'text-indigo-600'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      ? 'text-indigo-600'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                       }`}
                   >
                     {cat.name}
@@ -90,8 +92,8 @@ export default function Header({ categories }: { categories: any[] }) {
               href="/products"
               prefetch={false}
               className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${pathname === '/products'
-                  ? 'text-indigo-600'
-                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                ? 'text-indigo-600'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
             >
               All Products
@@ -191,8 +193,8 @@ export default function Header({ categories }: { categories: any[] }) {
                     href={`/category/${cat.slug}`}
                     prefetch={false}
                     className={`block py-2.5 px-3 text-sm font-medium rounded-lg transition-colors duration-150 ${pathname === `/category/${cat.slug}`
-                        ? 'text-indigo-600 bg-indigo-50'
-                        : 'text-gray-700 hover:text-black hover:bg-gray-50'
+                      ? 'text-indigo-600 bg-indigo-50'
+                      : 'text-gray-700 hover:text-black hover:bg-gray-50'
                       }`}
                     onClick={() => setMobileOpen(false)}
                   >
@@ -203,8 +205,8 @@ export default function Header({ categories }: { categories: any[] }) {
                   href="/products"
                   prefetch={false}
                   className={`block py-2.5 px-3 text-sm font-medium rounded-lg transition-colors duration-150 ${pathname === '/products'
-                      ? 'text-indigo-600 bg-indigo-50'
-                      : 'text-gray-700 hover:text-black hover:bg-gray-50'
+                    ? 'text-indigo-600 bg-indigo-50'
+                    : 'text-gray-700 hover:text-black hover:bg-gray-50'
                     }`}
                   onClick={() => setMobileOpen(false)}
                 >
