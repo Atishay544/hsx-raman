@@ -13,22 +13,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: { default: "My Store", template: "%s | My Store" },
-  description: "Shop the best products at the best prices. Free shipping on orders above $499.",
-  keywords: ["ecommerce", "shop", "online store", "buy online"],
-  authors: [{ name: "My Store" }],
+  title: { default: "HighStreetExpress", template: "%s | HighStreetExpress" },
+  description: "Shop quality products at HighStreetExpress. Free shipping on orders above £50.",
+  keywords: ["ecommerce", "shop", "online store", "buy online", "UK shopping"],
+  authors: [{ name: "HighStreetExpress" }],
   openGraph: {
     type: "website",
-    locale: "en_IN",
+    locale: "en_GB",
     url: process.env.NEXT_PUBLIC_APP_URL,
-    siteName: "My Store",
-    title: "My Store",
-    description: "Shop the best products at the best prices.",
+    siteName: "HighStreetExpress",
+    title: "HighStreetExpress",
+    description: "Shop quality products at HighStreetExpress. Free shipping on orders above £50.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "My Store",
-    description: "Shop the best products at the best prices.",
+    title: "HighStreetExpress",
+    description: "Shop quality products at HighStreetExpress. Free shipping on orders above £50.",
   },
   robots: {
     index: true,

@@ -36,11 +36,11 @@ const FAQS = [
       },
       {
         q: 'Is shipping free?',
-        a: 'Yes! Shipping is free on all orders above $499. Orders below $499 have a flat shipping fee of $49.',
+        a: 'Yes! Shipping is free on all orders above £50. Orders below £50 have a flat shipping fee of £5.',
       },
       {
-        q: 'Do you ship outside India?',
-        a: 'Currently we only ship within India. International shipping is on our roadmap — stay tuned!',
+        q: 'Do you ship outside UK?',
+        a: 'Currently we only ship within the United Kingdom. International shipping is on our roadmap — stay tuned!',
       },
       {
         q: 'What if I miss the delivery?',
