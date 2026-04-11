@@ -4,13 +4,13 @@ import { formatPrice } from '@/lib/utils'
 import { Package } from 'lucide-react'
 
 const STATUS_COLORS: Record<string, string> = {
-  pending:    'bg-yellow-100 text-yellow-700',
-  confirmed:  'bg-blue-100 text-blue-700',
+  pending: 'bg-yellow-100 text-yellow-700',
+  confirmed: 'bg-blue-100 text-blue-700',
   processing: 'bg-purple-100 text-purple-700',
-  shipped:    'bg-indigo-100 text-indigo-700',
-  delivered:  'bg-green-100 text-green-700',
-  cancelled:  'bg-red-100 text-red-600',
-  refunded:   'bg-gray-100 text-gray-600',
+  shipped: 'bg-indigo-100 text-indigo-700',
+  delivered: 'bg-green-100 text-green-700',
+  cancelled: 'bg-red-100 text-red-600',
+  refunded: 'bg-gray-100 text-gray-600',
 }
 
 export default async function OrdersPage() {
@@ -54,7 +54,7 @@ export default async function OrdersPage() {
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Total</p>
-                  <p className="font-bold">{formatPrice(order.total_amount, 'USD')}</p>
+                  <p className="font-bold">{formatPrice(order.total_amount, 'GBP')}</p>
                 </div>
                 <span className={`text-xs font-semibold px-3 py-1 rounded-full capitalize ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-600'}`}>
                   {order.status}

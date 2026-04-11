@@ -46,10 +46,10 @@ export default async function ProductsPage({ searchParams }: Props) {
   if (params.max) query = query.lte('price', parseFloat(params.max))
 
   const sort = params.sort ?? 'newest'
-  if (sort === 'newest')       query = query.order('created_at', { ascending: false })
-  else if (sort === 'price_asc')  query = query.order('price', { ascending: true })
+  if (sort === 'newest') query = query.order('created_at', { ascending: false })
+  else if (sort === 'price_asc') query = query.order('price', { ascending: true })
   else if (sort === 'price_desc') query = query.order('price', { ascending: false })
-  else if (sort === 'popular')    query = query.order('stock', { ascending: false })
+  else if (sort === 'popular') query = query.order('stock', { ascending: false })
 
   const { data: products, count } = await query
   const { data: categories } = await supabase
@@ -125,9 +125,9 @@ function ProductCard({ product }: { product: any }) {
       </div>
       <p className="text-sm font-medium line-clamp-2 mb-1">{product.name}</p>
       <div className="flex items-center gap-2">
-        <span className="font-bold">{formatPrice(product.price, 'USD')}</span>
+        <span className="font-bold">{formatPrice(product.price, 'GBP')}</span>
         {product.compare_price && (
-          <span className="text-sm text-gray-400 line-through">{formatPrice(product.compare_price, 'USD')}</span>
+          <span className="text-sm text-gray-400 line-through">{formatPrice(product.compare_price, 'GBP')}</span>
         )}
       </div>
     </Link>

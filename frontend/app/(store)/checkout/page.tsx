@@ -166,7 +166,7 @@ export default function CheckoutPage() {
               {couponError && <p className="text-red-500 text-xs mt-2">{couponError}</p>}
               {couponResult && (
                 <p className="text-green-600 text-sm mt-2 font-medium">
-                  Coupon applied! You save {formatPrice(couponResult.discount, 'USD')}
+                  Coupon applied! You save {formatPrice(couponResult.discount, 'GBP')}
                 </p>
               )}
             </div>
@@ -180,24 +180,24 @@ export default function CheckoutPage() {
                 {items.map(i => (
                   <div key={i.id} className="flex justify-between text-sm">
                     <span className="text-gray-600 truncate flex-1 mr-2">{i.name} × {i.quantity}</span>
-                    <span className="font-medium shrink-0">{formatPrice(i.price * i.quantity, 'USD')}</span>
+                    <span className="font-medium shrink-0">{formatPrice(i.price * i.quantity, 'GBP')}</span>
                   </div>
                 ))}
               </div>
               <div className="border-t pt-3 space-y-1.5 text-sm">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span>{formatPrice(subtotal, 'USD')}</span>
+                  <span>{formatPrice(subtotal, 'GBP')}</span>
                 </div>
                 {discount > 0 && (
                   <div className="flex justify-between text-green-600">
                     <span>Coupon discount</span>
-                    <span>-{formatPrice(discount, 'USD')}</span>
+                    <span>-{formatPrice(discount, 'GBP')}</span>
                   </div>
                 )}
                 <div className="flex justify-between font-bold text-base border-t pt-2 mt-2">
                   <span>Total</span>
-                  <span>{formatPrice(grandTotal, 'USD')}</span>
+                  <span>{formatPrice(grandTotal, 'GBP')}</span>
                 </div>
               </div>
               {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
@@ -205,7 +205,7 @@ export default function CheckoutPage() {
                 onClick={handleCheckout}
                 disabled={loading}
                 className="mt-4 w-full bg-black text-white py-3.5 rounded-xl font-semibold hover:bg-gray-800 transition disabled:opacity-50">
-                {loading ? 'Processing…' : `Pay ${formatPrice(grandTotal, 'USD')}`}
+                {loading ? 'Processing…' : `Pay ${formatPrice(grandTotal, 'GBP')}`}
               </button>
               <p className="text-center text-xs text-gray-400 mt-3">Secured by Razorpay</p>
             </div>

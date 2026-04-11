@@ -159,12 +159,12 @@ export default async function ProductDetailPage({ params }: Props) {
           <div>
             <div className="flex items-baseline gap-3 flex-wrap">
               <span className="text-3xl font-extrabold text-gray-900">
-                {formatPrice(product.price, 'USD')}
+                {formatPrice(product.price, 'GBP')}
               </span>
               {product.compare_price && (
                 <>
                   <span className="text-lg text-gray-400 line-through">
-                    {formatPrice(product.compare_price, 'USD')}
+                    {formatPrice(product.compare_price, 'GBP')}
                   </span>
                   <span className="text-base font-bold text-green-600">
                     {discount}% OFF
@@ -174,7 +174,7 @@ export default async function ProductDetailPage({ params }: Props) {
             </div>
             {savings > 0 && (
               <p className="text-sm text-green-600 font-medium mt-1">
-                You save {formatPrice(savings, 'USD')}
+                You save {formatPrice(savings, 'GBP')}}
               </p>
             )}
             <p className="text-xs text-gray-400 mt-1">inclusive of all taxes</p>
@@ -183,19 +183,18 @@ export default async function ProductDetailPage({ params }: Props) {
           {/* Stock */}
           <div className="flex items-center gap-2">
             <span
-              className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
-                product.stock === 0
+              className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${product.stock === 0
                   ? 'bg-red-50 text-red-600'
                   : product.stock < 10
-                  ? 'bg-amber-50 text-amber-700'
-                  : 'bg-green-50 text-green-700'
-              }`}
+                    ? 'bg-amber-50 text-amber-700'
+                    : 'bg-green-50 text-green-700'
+                }`}
             >
               {product.stock === 0
                 ? 'Out of Stock'
                 : product.stock < 10
-                ? `Only ${product.stock} left!`
-                : 'In Stock'}
+                  ? `Only ${product.stock} left!`
+                  : 'In Stock'}
             </span>
             {product.sku && (
               <span className="text-xs text-gray-400">SKU: {product.sku}</span>

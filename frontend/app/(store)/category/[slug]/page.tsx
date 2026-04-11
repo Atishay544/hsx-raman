@@ -43,10 +43,10 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     .eq('is_active', true)
     .range(offset, offset + PAGE_SIZE - 1)
 
-  if (sort === 'price_asc')       query = query.order('price', { ascending: true })
+  if (sort === 'price_asc') query = query.order('price', { ascending: true })
   else if (sort === 'price_desc') query = query.order('price', { ascending: false })
-  else if (sort === 'popular')    query = query.order('stock', { ascending: false })
-  else                            query = query.order('created_at', { ascending: false })
+  else if (sort === 'popular') query = query.order('stock', { ascending: false })
+  else query = query.order('created_at', { ascending: false })
 
   const { data: products, count } = await query
   const totalPages = Math.ceil((count ?? 0) / PAGE_SIZE)
@@ -68,7 +68,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
       <div className="flex items-center justify-between mb-5 flex-wrap gap-3">
         <p className="text-sm text-gray-500">{count ?? 0} products</p>
         <div className="flex gap-2">
-          {[['newest','Newest'],['popular','Popular'],['price_asc','Price ↑'],['price_desc','Price ↓']].map(([v, l]) => (
+          {[['newest', 'Newest'], ['popular', 'Popular'], ['price_asc', 'Price ↑'], ['price_desc', 'Price ↓']].map(([v, l]) => (
             <Link key={v}
               href={`/category/${slug}?sort=${v}`}
               className={`text-xs px-3 py-1.5 rounded-full border transition ${sort === v ? 'bg-black text-white border-black' : 'border-gray-300 hover:border-gray-500'}`}>
@@ -97,8 +97,8 @@ export default async function CategoryPage({ params, searchParams }: Props) {
                 </div>
                 <p className="text-sm font-medium line-clamp-2">{p.name}</p>
                 <div className="flex items-center gap-2 mt-0.5">
-                  <span className="font-bold text-sm">{formatPrice(p.price, 'USD')}</span>
-                  {p.compare_price && <span className="text-xs text-gray-400 line-through">{formatPrice(p.compare_price, 'USD')}</span>}
+                  <span className="font-bold text-sm">{formatPrice(p.price, 'GBP')}</span>
+                  {p.compare_price && <span className="text-xs text-gray-400 line-through">{formatPrice(p.compare_price, 'GBP')}</span>}
                 </div>
               </Link>
             )

@@ -11,7 +11,7 @@ interface Props {
   searchParams: Promise<{ success?: string; payment?: string }>
 }
 
-const STEPS = ['pending','confirmed','processing','shipped','delivered']
+const STEPS = ['pending', 'confirmed', 'processing', 'shipped', 'delivered']
 
 export default async function OrderDetailPage({ params, searchParams }: Props) {
   const { id } = await params
@@ -67,7 +67,7 @@ export default async function OrderDetailPage({ params, searchParams }: Props) {
       </div>
 
       {/* Progress tracker */}
-      {!['cancelled','refunded'].includes(order.status) && (
+      {!['cancelled', 'refunded'].includes(order.status) && (
         <div className="flex items-center mb-8 overflow-x-auto pb-2">
           {STEPS.map((step, i) => (
             <div key={step} className="flex items-center">
@@ -105,7 +105,7 @@ export default async function OrderDetailPage({ params, searchParams }: Props) {
                 </Link>
                 <p className="text-xs text-gray-500 mt-0.5">Qty: {item.quantity}</p>
               </div>
-              <p className="font-bold text-sm shrink-0">{formatPrice(item.price * item.quantity, 'USD')}</p>
+              <p className="font-bold text-sm shrink-0">{formatPrice(item.price * item.quantity, 'GBP')}</p>
             </div>
           ))}
         </div>
@@ -116,11 +116,11 @@ export default async function OrderDetailPage({ params, searchParams }: Props) {
         <div className="border rounded-2xl p-5">
           <h2 className="font-semibold mb-3">Payment Summary</h2>
           <div className="space-y-1.5 text-sm">
-            <div className="flex justify-between"><span className="text-gray-500">Subtotal</span><span>{formatPrice(order.subtotal_amount, 'USD')}</span></div>
-            {order.discount_amount > 0 && <div className="flex justify-between text-green-600"><span>Discount</span><span>-{formatPrice(order.discount_amount, 'USD')}</span></div>}
-            <div className="flex justify-between"><span className="text-gray-500">Shipping</span><span>{formatPrice(order.shipping_amount ?? 0, 'USD')}</span></div>
+            <div className="flex justify-between"><span className="text-gray-500">Subtotal</span><span>{formatPrice(order.subtotal_amount, 'GBP')}</span></div>
+            {order.discount_amount > 0 && <div className="flex justify-between text-green-600"><span>Discount</span><span>-{formatPrice(order.discount_amount, 'GBP')}</span></div>}
+            <div className="flex justify-between"><span className="text-gray-500">Shipping</span><span>{formatPrice(order.shipping_amount ?? 0, 'GBP')}</span></div>
             <div className="flex justify-between font-bold border-t pt-2 mt-2">
-              <span>Total</span><span>{formatPrice(order.total_amount, 'USD')}</span>
+              <span>Total</span><span>{formatPrice(order.total_amount, 'GBP')}</span>
             </div>
           </div>
         </div>

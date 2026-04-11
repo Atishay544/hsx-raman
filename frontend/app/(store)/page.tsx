@@ -113,9 +113,8 @@ export default async function HomePage() {
       {deals && deals.length > 0 && (
         <section className="max-w-350 mx-auto px-4 sm:px-6 lg:px-10 pb-14">
           <div
-            className={`relative overflow-hidden rounded-2xl min-h-50 flex flex-col sm:flex-row items-center justify-between gap-6 px-8 sm:px-12 py-10 ${
-              dealBanner ? '' : 'bg-linear-to-r from-rose-500 to-orange-400'
-            }`}
+            className={`relative overflow-hidden rounded-2xl min-h-50 flex flex-col sm:flex-row items-center justify-between gap-6 px-8 sm:px-12 py-10 ${dealBanner ? '' : 'bg-linear-to-r from-rose-500 to-orange-400'
+              }`}
             style={dealBanner ? { backgroundColor: dealBanner.bg_color ?? '#111827' } : undefined}
           >
             {dealBanner?.image_url && (
@@ -182,7 +181,7 @@ function SectionHeader({ title, href, linkLabel }: { title: string; href?: strin
 function ProductCard({ product }: {
   product: { id: string; name: string; slug: string; price: number; compare_price: number | null; images: string[] | null }
 }) {
-  const image    = product.images?.[0]
+  const image = product.images?.[0]
   const discount = product.compare_price
     ? Math.round((1 - product.price / product.compare_price) * 100)
     : 0
@@ -213,10 +212,10 @@ function ProductCard({ product }: {
           {product.name}
         </p>
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-bold text-sm text-gray-900">{formatPrice(product.price, 'USD')}</span>
+          <span className="font-bold text-sm text-gray-900">{formatPrice(product.price, 'GBP')}</span>
           {product.compare_price && (
             <span className="text-xs text-gray-400 line-through">
-              {formatPrice(product.compare_price, 'USD')}
+              {formatPrice(product.compare_price, 'GBP')}
             </span>
           )}
         </div>
