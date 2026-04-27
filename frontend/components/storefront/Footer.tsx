@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Category = { id: string; name: string; slug: string }
 
@@ -22,8 +23,8 @@ const staticLinks = {
 
 const socials = [
   { label: 'Instagram', href: '#', icon: 'IG' },
-  { label: 'Twitter', href: '#', icon: 'TW' },
-  { label: 'Facebook', href: '#', icon: 'FB' },
+  { label: 'Twitter',   href: '#', icon: 'TW' },
+  { label: 'Facebook',  href: '#', icon: 'FB' },
 ]
 
 export default function Footer({ categories = [] }: { categories?: Category[] }) {
@@ -32,8 +33,16 @@ export default function Footer({ categories = [] }: { categories?: Category[] })
       <div className="max-w-350 mx-auto px-4 sm:px-6 lg:px-10 grid grid-cols-2 md:grid-cols-5 gap-8 mb-10">
         {/* Brand */}
         <div className="col-span-2 md:col-span-1">
-          <h2 className="text-white font-bold text-xl mb-3">HighStreetExpress</h2>
-          <p className="text-sm leading-relaxed">Quality products delivered to your door. Free shipping on orders above £50.</p>
+          <Link href="/" className="inline-flex items-center mb-3">
+            <Image
+              src="/hsx.jpeg"
+              alt="HighStreetExpress"
+              width={120}
+              height={40}
+              className="h-10 w-auto object-contain"
+            />
+          </Link>
+          <p className="text-sm leading-relaxed">Your trusted destination for premium fashion & lifestyle products. Fast UK delivery.</p>
           <div className="flex gap-3 mt-4">
             {socials.map(s => (
               <a key={s.label} href={s.href}
@@ -76,24 +85,13 @@ export default function Footer({ categories = [] }: { categories?: Category[] })
         ))}
       </div>
 
-      <div className="border-t border-gray-800 pt-6 max-w-350 mx-auto px-4 sm:px-6 lg:px-10">
-        {/* Contact Information */}
-        <div className="mb-6 pb-6 border-b border-gray-800">
-          <h3 className="text-white font-semibold mb-3 text-sm">Contact Info</h3>
-          <div className="text-sm text-gray-400 space-y-2">
-            <p><span className="text-gray-300 font-medium">Name:</span> Vivek Saxena</p>
-            <p><span className="text-gray-300 font-medium">Mobile:</span> +44 - 07818923405</p>
-            <p><span className="text-gray-300 font-medium">Email:</span> riders@highstreetexpress.com</p>
-          </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} HighStreetExpress. All rights reserved.</p>
-          <div className="flex gap-4">
-            <a href="mailto:orders@highstreetexpress.com" className="hover:text-white">orders@highstreetexpress.com</a>
-            <a href="mailto:support@highstreetexpress.com" className="hover:text-white">support@highstreetexpress.com</a>
-          </div>
+      <div className="border-t border-gray-800 pt-6 max-w-350 mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+        <p>© {new Date().getFullYear()} HighStreetExpress. All rights reserved.</p>
+        <div className="flex flex-col sm:flex-row items-center gap-3 text-sm">
+          <span className="text-gray-400 font-medium">Contact:</span>
+          <span>Vivek Saxena</span>
+          <a href="tel:+4407818923405" className="hover:text-white transition">+44 07818 923405</a>
+          <a href="mailto:riders@highstreetexpress.com" className="hover:text-white transition">riders@highstreetexpress.com</a>
         </div>
       </div>
     </footer>
