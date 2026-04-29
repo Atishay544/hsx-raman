@@ -51,6 +51,8 @@ const getProductsPage = unstable_cache(
       .from('products')
       .select('id,name,slug,price,compare_price,images,categories(name,slug)', { count: 'exact' })
       .eq('is_active', true)
+      .not('slug', 'is', null)
+      .neq('slug', '')
       .range(offset, offset + PAGE_SIZE - 1)
 
     if (params.category) query = query.eq('category_id', params.category)

@@ -78,6 +78,8 @@ const getCategoryProducts = unstable_cache(
       .select('id,name,slug,price,compare_price,images', { count: 'exact' })
       .eq('category_id', categoryId)
       .eq('is_active', true)
+      .not('slug', 'is', null)
+      .neq('slug', '')
       .range(offset, offset + PAGE_SIZE - 1)
 
     if (sort === 'price_asc')       query = query.order('price', { ascending: true })

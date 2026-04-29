@@ -52,12 +52,16 @@ const getDynamicHomeProducts = unstable_cache(
         .from('products')
         .select('id,name,slug,price,compare_price,images')
         .eq('is_active', true)
+        .not('slug', 'is', null)
+        .neq('slug', '')
         .order('created_at', { ascending: false })
         .limit(8),
       supabase
         .from('products')
         .select('id,name,slug,price,compare_price,images')
         .eq('is_active', true)
+        .not('slug', 'is', null)
+        .neq('slug', '')
         .not('compare_price', 'is', null)
         .order('created_at', { ascending: false })
         .limit(8),
