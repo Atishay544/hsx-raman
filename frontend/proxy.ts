@@ -55,10 +55,17 @@ export async function proxy(req: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // Admin role check — app_metadata.role is embedded in the signed JWT
+  // Admin role check — fast path via JWT app_metadata, fallback to profiles table
   if (pathname.startsWith('/admin') && user) {
     if (user.app_metadata?.role !== 'admin') {
-      return NextResponse.redirect(new URL('/?error=unauthorized', req.url))
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single()
+      if (profile?.role !== 'admin') {
+        return NextResponse.redirect(new URL('/?error=unauthorized', req.url))
+      }
     }
   }
 
