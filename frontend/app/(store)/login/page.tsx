@@ -1,13 +1,15 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 type Tab = 'google' | 'password' | 'email' | 'phone'
 
 export default function LoginPage() {
   const supabase = createClient()
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirectTo = searchParams.get('redirect') ?? '/'
   const [tab, setTab] = useState<Tab>('password')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
@@ -25,7 +27,7 @@ export default function LoginPage() {
     setLoading(true)
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${location.origin}/auth/callback` },
+      options: { redirectTo: `${location.origin}/auth/callback?redirect=${encodeURIComponent(redirectTo)}` },
     })
   }
 
@@ -44,12 +46,12 @@ export default function LoginPage() {
         setStep('check-email')
         return
       }
-      router.push('/')
+      router.push(redirectTo)
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       setLoading(false)
       if (error) return setError(error.message)
-      router.push('/')
+      router.push(redirectTo)
     }
   }
 
@@ -66,7 +68,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.verifyOtp({ email, token: otp, type: 'email' })
     setLoading(false)
     if (error) return setError(error.message)
-    router.push('/')
+    router.push(redirectTo)
   }
 
   async function handlePhoneOtp() {
@@ -84,7 +86,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.verifyOtp({ phone: formatted, token: otp, type: 'sms' })
     setLoading(false)
     if (error) return setError(error.message)
-    router.push('/')
+    router.push(redirectTo)
   }
 
   const tabs: { key: Tab; label: string }[] = [
