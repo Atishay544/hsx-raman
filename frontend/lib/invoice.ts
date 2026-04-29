@@ -39,7 +39,7 @@ export interface InvoiceOrder {
 }
 
 function fmt(n: number) {
-  return '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  return '£' + Number(n).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 // Brand colours

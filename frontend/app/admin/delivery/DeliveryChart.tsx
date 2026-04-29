@@ -92,7 +92,7 @@ interface Props {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function fmt(n: number) {
-  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n)
+  return new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n)
 }
 
 function fmtW(g: number) {

@@ -233,7 +233,7 @@ export async function generateMetadata({ params }: Props) {
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.layerfactory.in'
   const title = product.name
   const description = product.description?.slice(0, 160)
-    ?? `Buy ${product.name} online at LayerFactory. Best price ₹${product.price}. Free shipping above ₹499.`
+    ?? `Buy ${product.name} online at LayerFactory. Best price £${product.price}. Free shipping above £20.`
   const image = product.images?.[0]
   const canonical = `${BASE_URL}/products/${slug}`
 
@@ -305,7 +305,7 @@ export default async function ProductDetailPage({ params }: Props) {
               offers: {
                 '@type': 'Offer',
                 url: `${BASE_URL}/products/${product.slug}`,
-                priceCurrency: 'INR',
+                priceCurrency: 'GBP',
                 price: product.price,
                 priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
                 availability: (product.stock ?? 1) > 0
@@ -316,7 +316,7 @@ export default async function ProductDetailPage({ params }: Props) {
                   priceSpecification: {
                     '@type': 'UnitPriceSpecification',
                     price: product.price,
-                    priceCurrency: 'INR',
+                    priceCurrency: 'GBP',
                   },
                 } : {}),
               },

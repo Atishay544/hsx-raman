@@ -117,47 +117,47 @@ export default async function OrderDetailPage({ params }: PageProps) {
                   <tr key={item.id} className="border-t border-gray-100">
                     <td className="px-5 py-3 text-gray-700">{item.snapshot?.name ?? '—'}</td>
                     <td className="px-5 py-3 text-right text-gray-600">{item.quantity}</td>
-                    <td className="px-5 py-3 text-right text-gray-600">₹{Number(item.unit_price).toLocaleString('en-IN')}</td>
-                    <td className="px-5 py-3 text-right font-medium">₹{Number(item.total).toLocaleString('en-IN')}</td>
+                    <td className="px-5 py-3 text-right text-gray-600">£{Number(item.unit_price).toLocaleString('en-GB')}</td>
+                    <td className="px-5 py-3 text-right font-medium">£{Number(item.total).toLocaleString('en-GB')}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
             <div className="px-5 py-4 border-t border-gray-100 space-y-1.5">
               <div className="flex justify-between text-sm text-gray-500">
-                <span>Subtotal</span><span>₹{Number(order.subtotal).toLocaleString('en-IN')}</span>
+                <span>Subtotal</span><span>£{Number(order.subtotal).toLocaleString('en-GB')}</span>
               </div>
               {(order as any).discount_amount > 0 && (
                 <div className="flex justify-between text-sm text-green-600">
-                  <span>Discount</span><span>-₹{Number((order as any).discount_amount).toLocaleString('en-IN')}</span>
+                  <span>Discount</span><span>-£{Number((order as any).discount_amount).toLocaleString('en-GB')}</span>
                 </div>
               )}
               <div className="flex justify-between text-sm text-gray-500">
-                <span>Tax</span><span>₹{Number(order.tax).toLocaleString('en-IN')}</span>
+                <span>Tax</span><span>£{Number(order.tax).toLocaleString('en-GB')}</span>
               </div>
               <div className="flex justify-between text-sm text-gray-500">
-                <span>Shipping</span><span>₹{Number(order.shipping).toLocaleString('en-IN')}</span>
+                <span>Shipping</span><span>£{Number(order.shipping).toLocaleString('en-GB')}</span>
               </div>
               <div className="flex justify-between text-base font-bold text-gray-900 pt-1 border-t border-gray-100">
-                <span>Total</span><span>₹{Number(order.total).toLocaleString('en-IN')}</span>
+                <span>Total</span><span>£{Number(order.total).toLocaleString('en-GB')}</span>
               </div>
               {/* COD upfront breakdown */}
               {pmMethod === 'cod_upfront' && meta.amount_charged && (
                 <div className="mt-2 pt-2 border-t border-gray-100 space-y-1">
                   <div className="flex justify-between text-sm text-blue-700">
                     <span>Paid upfront ({meta.offer_upfront_pct}%)</span>
-                    <span>₹{Number(meta.amount_charged).toLocaleString('en-IN')}</span>
+                    <span>£{Number(meta.amount_charged).toLocaleString('en-GB')}</span>
                   </div>
                   <div className="flex justify-between text-sm text-orange-700">
                     <span>Due on delivery</span>
-                    <span>₹{Number(meta.amount_on_delivery).toLocaleString('en-IN')}</span>
+                    <span>£{Number(meta.amount_on_delivery).toLocaleString('en-GB')}</span>
                   </div>
                 </div>
               )}
               {pmMethod === 'cod' && meta.amount_on_delivery && (
                 <div className="flex justify-between text-sm text-orange-700 mt-2 pt-2 border-t border-gray-100">
                   <span>Collect on delivery</span>
-                  <span>₹{Number(meta.amount_on_delivery).toLocaleString('en-IN')}</span>
+                  <span>£{Number(meta.amount_on_delivery).toLocaleString('en-GB')}</span>
                 </div>
               )}
             </div>

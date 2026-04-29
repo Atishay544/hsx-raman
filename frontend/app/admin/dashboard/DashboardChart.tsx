@@ -46,12 +46,11 @@ export interface DashboardProps {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 const fmt = (n: number) =>
-  new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(n)
+  new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', maximumFractionDigits: 0 }).format(n)
 
 function fmtShort(n: number) {
-  if (n >= 10000000) return `₹${(n / 10000000).toFixed(1)}Cr`
-  if (n >= 100000)   return `₹${(n / 100000).toFixed(1)}L`
-  if (n >= 1000)     return `₹${(n / 1000).toFixed(1)}K`
+  if (n >= 1000000) return `£${(n / 1000000).toFixed(1)}M`
+  if (n >= 1000)    return `£${(n / 1000).toFixed(1)}K`
   return fmt(n)
 }
 

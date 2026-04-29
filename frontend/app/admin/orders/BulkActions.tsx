@@ -217,7 +217,7 @@ export default function BulkActions({ initialOrders, statusFilter, searchQuery }
                       {order.customerName ?? <span className="text-gray-400 italic">Unknown</span>}
                     </td>
                     <td className="px-4 py-3 text-right font-medium text-gray-900">
-                      ₹{Number(order.total).toLocaleString('en-IN')}
+                      £{Number(order.total).toLocaleString('en-GB')}
                     </td>
                     <td className="px-4 py-3">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${STATUS_COLORS[order.status] ?? 'bg-gray-100 text-gray-700'}`}>

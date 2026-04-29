@@ -21,9 +21,9 @@ export default function ShippingPolicyPage() {
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">Free Shipping</h2>
           <div className="bg-green-50 border border-green-200 rounded-xl p-4 text-green-800 font-medium">
-            🎉 Free shipping on all orders above ₹499
+            🎉 Free shipping on all orders above £20
           </div>
-          <p className="mt-3">Orders below ₹499 are charged a flat shipping fee of ₹49.</p>
+          <p className="mt-3">Orders below £20 are charged a flat shipping fee of £2.99.</p>
         </section>
 
         <section>
@@ -39,30 +39,30 @@ export default function ShippingPolicyPage() {
               </thead>
               <tbody className="divide-y divide-gray-100">
                 <tr>
-                  <td className="px-4 py-3">Metro cities (Mumbai, Delhi, Bengaluru, Chennai, Hyderabad, Pune, Kolkata)</td>
-                  <td className="px-4 py-3 font-medium">1–3 business days</td>
-                  <td className="px-4 py-3">Free above ₹499</td>
+                  <td className="px-4 py-3">London &amp; major cities</td>
+                  <td className="px-4 py-3 font-medium">1–2 business days</td>
+                  <td className="px-4 py-3">Free above £20</td>
                 </tr>
                 <tr>
-                  <td className="px-4 py-3">Tier-2 &amp; Tier-3 cities</td>
+                  <td className="px-4 py-3">Rest of England &amp; Wales</td>
+                  <td className="px-4 py-3 font-medium">2–3 business days</td>
+                  <td className="px-4 py-3">Free above £20</td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3">Scotland &amp; Northern Ireland</td>
                   <td className="px-4 py-3 font-medium">3–5 business days</td>
-                  <td className="px-4 py-3">Free above ₹499</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3">Remote &amp; rural areas</td>
-                  <td className="px-4 py-3 font-medium">5–8 business days</td>
-                  <td className="px-4 py-3">Free above ₹499</td>
+                  <td className="px-4 py-3">Free above £20</td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <p className="text-sm text-gray-500 mt-2">Business days are Monday–Saturday, excluding public holidays.</p>
+          <p className="text-sm text-gray-500 mt-2">Business days are Monday–Friday, excluding public holidays.</p>
         </section>
 
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">Order Processing</h2>
           <ul className="list-disc pl-5 space-y-1">
-            <li>Orders placed before <strong>2:00 PM IST</strong> on a business day are typically dispatched the same day.</li>
+            <li>Orders placed before <strong>2:00 PM GMT</strong> on a business day are typically dispatched the same day.</li>
             <li>Orders placed after 2:00 PM or on weekends/holidays are dispatched the next business day.</li>
             <li>You'll receive a shipping confirmation email with a tracking number once your order is dispatched.</li>
           </ul>
@@ -80,7 +80,7 @@ export default function ShippingPolicyPage() {
 
         <section>
           <h2 className="text-xl font-semibold text-gray-900 mb-3">Shipping Partners</h2>
-          <p>We work with leading logistics partners including Delhivery, Bluedart, DTDC, and India Post to ensure reliable and timely delivery across India.</p>
+          <p>We work with leading UK logistics partners including Royal Mail, DPD, and Evri to ensure reliable and timely delivery across the UK.</p>
         </section>
 
         <section>

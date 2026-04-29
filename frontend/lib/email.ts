@@ -17,8 +17,8 @@ const FROM = `"${process.env.SMTP_FROM_NAME ?? 'Layers Factory'}" <${process.env
 
 // ─── Shared helpers ─────────────────────────────────────────────────────────
 
-function formatINR(n: number) {
-  return '₹' + Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+function formatGBP(n: number) {
+  return '£' + Number(n).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 function orderItemsHtml(items: { name: string; quantity: number; unit_price: number }[]) {
@@ -26,7 +26,7 @@ function orderItemsHtml(items: { name: string; quantity: number; unit_price: num
     <tr>
       <td style="padding:8px 12px;border-bottom:1px solid #f0f0f0">${i.name}</td>
       <td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;text-align:center">${i.quantity}</td>
-      <td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;text-align:right">${formatINR(i.unit_price * i.quantity)}</td>
+      <td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;text-align:right">${formatGBP(i.unit_price * i.quantity)}</td>
     </tr>`
   ).join('')
 }
@@ -76,12 +76,12 @@ export async function sendOrderConfirmation(p: OrderConfirmParams) {
   const paymentDetail =
     p.paymentMethod === 'cod'
       ? `<p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px 16px;color:#9a3412;margin:16px 0">
-           <strong>Cash on Delivery</strong> — please keep <strong>${formatINR(p.total)}</strong> ready at the time of delivery.
+           <strong>Cash on Delivery</strong> — please keep <strong>${formatGBP(p.total)}</strong> ready at the time of delivery.
          </p>`
       : p.paymentMethod === 'cod_upfront' && p.amountCharged !== undefined
         ? `<p style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:12px 16px;color:#166534;margin:16px 0">
-             Paid upfront: <strong>${formatINR(p.amountCharged)}</strong> &nbsp;|&nbsp;
-             Due on delivery: <strong>${formatINR(p.amountOnDelivery ?? 0)}</strong>
+             Paid upfront: <strong>${formatGBP(p.amountCharged)}</strong> &nbsp;|&nbsp;
+             Due on delivery: <strong>${formatGBP(p.amountOnDelivery ?? 0)}</strong>
            </p>`
         : `<p style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;color:#1e40af;margin:16px 0">
              Payment received online. Thank you!
@@ -100,9 +100,9 @@ export async function sendOrderConfirmation(p: OrderConfirmParams) {
       <tbody>${orderItemsHtml(p.items)}</tbody>
     </table>
     <table width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 24px">
-      ${p.discount > 0 ? `<tr><td style="padding:4px 0;color:#666;font-size:14px">Discount</td><td style="padding:4px 0;text-align:right;color:#16a34a;font-size:14px">-${formatINR(p.discount)}</td></tr>` : ''}
+      ${p.discount > 0 ? `<tr><td style="padding:4px 0;color:#666;font-size:14px">Discount</td><td style="padding:4px 0;text-align:right;color:#16a34a;font-size:14px">-${formatGBP(p.discount)}</td></tr>` : ''}
       <tr><td style="padding:8px 0 0;font-weight:700;font-size:16px;border-top:1px solid #eee">Total</td>
-          <td style="padding:8px 0 0;text-align:right;font-weight:700;font-size:16px;border-top:1px solid #eee">${formatINR(p.total)}</td></tr>
+          <td style="padding:8px 0 0;text-align:right;font-weight:700;font-size:16px;border-top:1px solid #eee">${formatGBP(p.total)}</td></tr>
     </table>
     <div style="background:#f9f9f9;border-radius:8px;padding:16px;font-size:13px;color:#555;line-height:1.6">
       <strong style="display:block;margin-bottom:4px;color:#333">Deliver to</strong>
@@ -134,7 +134,7 @@ export async function sendNewOrderAlert(p: NewOrderAlertParams) {
   const html = baseLayout(`
     <h2 style="margin:0 0 4px;font-size:20px;color:#111">New Order Received</h2>
     <p style="margin:0 0 20px;color:#666;font-size:14px">Order #${p.orderId.slice(0,8).toUpperCase()} from ${p.customerEmail}</p>
-    <p style="margin:0 0 8px;font-size:13px;color:#555"><strong>Payment:</strong> ${p.paymentMethod} &nbsp;·&nbsp; <strong>Total:</strong> ${formatINR(p.total)}</p>
+    <p style="margin:0 0 8px;font-size:13px;color:#555"><strong>Payment:</strong> ${p.paymentMethod} &nbsp;·&nbsp; <strong>Total:</strong> ${formatGBP(p.total)}</p>
     <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eee;border-radius:8px;overflow:hidden;margin:16px 0">
       <thead><tr style="background:#f9f9f9">
         <th style="padding:8px 12px;text-align:left;font-size:12px;color:#666">ITEM</th>
@@ -156,7 +156,7 @@ export async function sendNewOrderAlert(p: NewOrderAlertParams) {
   await getTransport().sendMail({
     from:    FROM,
     to:      process.env.ORDERS_EMAIL ?? process.env.SMTP_USER!,
-    subject: `New Order #${p.orderId.slice(0,8).toUpperCase()} — ${formatINR(p.total)} (${p.paymentMethod})`,
+    subject: `New Order #${p.orderId.slice(0,8).toUpperCase()} — ${formatGBP(p.total)} (${p.paymentMethod})`,
     html,
   })
 }

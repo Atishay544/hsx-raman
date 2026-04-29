@@ -29,7 +29,7 @@ export const FAQS = [
       },
       {
         q: 'Is shipping free?',
-        a: 'Yes! Shipping is free on all orders above ₹499. Orders below ₹499 have a flat shipping fee of ₹49.',
+        a: 'Yes! Shipping is free on all orders above £20. Orders below £20 have a flat shipping fee of £2.99.',
       },
       {
         q: 'Do you ship outside India?',

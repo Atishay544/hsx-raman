@@ -105,7 +105,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
             </div>
             <div className="bg-white rounded-xl border border-gray-200 p-4">
               <p className="text-xs text-gray-400 mb-1">Total Spent</p>
-              <p className="text-lg font-bold text-gray-900">₹{totalSpent.toLocaleString('en-IN')}</p>
+              <p className="text-lg font-bold text-gray-900">£{totalSpent.toLocaleString('en-GB')}</p>
             </div>
           </div>
         </div>
@@ -135,7 +135,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
                     </span>
                   </div>
                   <div className="flex items-center gap-3 text-xs text-gray-400">
-                    <span className="font-semibold text-gray-700">₹{Number(order.total).toLocaleString('en-IN')}</span>
+                    <span className="font-semibold text-gray-700">£{Number(order.total).toLocaleString('en-GB')}</span>
                     <span>{new Date(order.created_at).toLocaleDateString('en-IN')}</span>
                   </div>
                 </div>
@@ -156,7 +156,7 @@ export default async function CustomerDetailPage({ params }: PageProps) {
                             }
                           </div>
                           <span className="text-xs text-gray-400 shrink-0 ml-3">
-                            ₹{(Number(item.unit_price) * item.quantity).toLocaleString('en-IN')}
+                            £{(Number(item.unit_price) * item.quantity).toLocaleString('en-GB')}
                           </span>
                         </div>
                       )

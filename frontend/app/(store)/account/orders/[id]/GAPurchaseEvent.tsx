@@ -24,7 +24,7 @@ export default function GAPurchaseEvent({ orderId, total, shipping, tax, items }
       value: total,
       tax,
       shipping,
-      currency: 'INR',
+      currency: 'GBP',
       items: items.map(item => ({
         item_id: item.id,
         item_name: item.name,

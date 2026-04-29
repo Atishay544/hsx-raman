@@ -79,7 +79,7 @@ function buildOrderReply(
     const oid = o.id.slice(0, 8).toUpperCase()
     const emoji = statusEmoji[o.status] ?? '📦'
     const date = new Date(o.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })
-    return `${i + 1}. **#${oid}** — ${o.status} ${emoji} (${date}) — ₹${Number(o.total).toLocaleString('en-IN')}`
+    return `${i + 1}. **#${oid}** — ${o.status} ${emoji} (${date}) — £${Number(o.total).toLocaleString('en-GB')}`
   })
 
   return `Here are your recent orders:\n\n${lines.join('\n')}\n\nFor full details, visit **My Orders** in your account. Type "track" for tracking info. 📋`

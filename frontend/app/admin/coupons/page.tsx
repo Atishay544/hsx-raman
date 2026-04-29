@@ -47,9 +47,9 @@ export default async function CouponsPage() {
                       <td className="px-4 py-3 text-gray-600">
                         {coupon.type === 'percentage'
                           ? `${coupon.value}%`
-                          : `₹${Number(coupon.value).toLocaleString('en-IN')}`}
+                          : `£${Number(coupon.value).toLocaleString('en-GB')}`}
                         {coupon.min_order
-                          ? <span className="text-xs text-gray-400 ml-1">(min ₹{Number(coupon.min_order).toLocaleString('en-IN')})</span>
+                          ? <span className="text-xs text-gray-400 ml-1">(min £{Number(coupon.min_order).toLocaleString('en-GB')})</span>
                           : null}
                       </td>
                       <td className="px-4 py-3 text-right text-gray-600">

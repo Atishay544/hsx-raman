@@ -313,7 +313,7 @@ export async function POST(req: NextRequest) {
   try {
     razorpayOrder = await getRazorpay().orders.create({
       amount:   Math.round(amountToCharge * 100),
-      currency: 'INR',
+      currency: 'GBP',
       receipt:  order.id.slice(0, 40),
       notes: {
         order_id:        order.id,

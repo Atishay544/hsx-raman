@@ -400,7 +400,7 @@ export default function DeliveryPanel({
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold text-green-800">{booked.partner} · {booked.service}</p>
-                <p className="text-xs text-green-700">₹{Number(booked.rate).toLocaleString('en-IN')} · {booked.service === 'Express' ? '2-3 days' : '5-7 days'}</p>
+                <p className="text-xs text-green-700">£{Number(booked.rate).toLocaleString('en-GB')} · {booked.service === 'Express' ? '2-3 days' : '5-7 days'}</p>
               </div>
               {!booked.awb && (
                 <button
@@ -635,7 +635,7 @@ export default function DeliveryPanel({
                     </p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-sm font-bold text-gray-900">₹{Number(rate.rate).toLocaleString('en-IN')}</span>
+                    <span className="text-sm font-bold text-gray-900">£{Number(rate.rate).toLocaleString('en-GB')}</span>
                     <button
                       onClick={() => selectRate(rate)}
                       disabled={assigning === rate.carrier_id + rate.service}
