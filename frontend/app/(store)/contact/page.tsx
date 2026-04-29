@@ -3,7 +3,7 @@ export const revalidate = 86400
 import type { Metadata } from 'next'
 import ContactForm from './ContactForm'
 import Link from 'next/link'
-import { Mail, MessageCircle, Clock } from 'lucide-react'
+import { Mail, MessageCircle, Clock, Phone, User } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Contact Us',
@@ -31,11 +31,26 @@ export default function ContactPage() {
 
           <div className="bg-gray-50 rounded-2xl p-5">
             <div className="flex items-center gap-3 mb-1">
+              <User size={18} className="text-gray-700" />
+              <h3 className="font-semibold text-gray-900">Contact Person</h3>
+            </div>
+            <p className="text-sm font-medium text-gray-900">Vivek Saxena</p>
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-5">
+            <div className="flex items-center gap-3 mb-1">
+              <Phone size={18} className="text-gray-700" />
+              <h3 className="font-semibold text-gray-900">Phone</h3>
+            </div>
+            <a href="tel:+4407818923405" className="text-sm text-black underline underline-offset-2">+44 07818 923405</a>
+          </div>
+
+          <div className="bg-gray-50 rounded-2xl p-5">
+            <div className="flex items-center gap-3 mb-1">
               <Mail size={18} className="text-gray-700" />
               <h3 className="font-semibold text-gray-900">Email</h3>
             </div>
-            <a href="mailto:atishayjain54@gmail.com" className="text-sm text-black underline underline-offset-2">atishayjain54@gmail.com</a>
-            <p className="text-xs text-gray-500 mt-2">Layers Factory — layerfactory.in</p>
+            <a href="mailto:riders@highstreetexpress.com" className="text-sm text-black underline underline-offset-2">riders@highstreetexpress.com</a>
           </div>
 
           <div className="bg-gray-50 rounded-2xl p-5">
@@ -43,7 +58,7 @@ export default function ContactPage() {
               <Clock size={18} className="text-gray-700" />
               <h3 className="font-semibold text-gray-900">Support Hours</h3>
             </div>
-            <p className="text-sm text-gray-600">Monday – Saturday<br />10:00 AM – 7:00 PM IST</p>
+            <p className="text-sm text-gray-600">Monday – Saturday<br />9:00 AM – 6:00 PM GMT</p>
             <p className="text-xs text-gray-400 mt-2">Typical response: within 4 hours</p>
           </div>
 
