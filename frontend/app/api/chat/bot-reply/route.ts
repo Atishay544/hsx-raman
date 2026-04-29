@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { rateLimit } from '@/lib/security/rate-limit'
+import { assertSameOrigin } from '@/lib/security/csrf'
 
 // ── Intent classification ─────────────────────────────────
 type Intent =
@@ -41,7 +43,7 @@ const STATIC_REPLIES: Partial<Record<Intent, string>> = {
   account:
     'For account help:\n\n\u2022 **Reset password**: Go to Login \u2192 Forgot Password\n\u2022 **Update address**: Account \u2192 Addresses\n\u2022 **Delete account**: Contact our support team\n\nType "agent" if you need direct assistance. \ud83d\udd10',
   contact_human:
-    'Connecting you to a support agent now\u2026 \ud83d\ude4b\n\nOur team is available **Mon\u2013Sat, 10am\u20137pm IST**. An agent will join this chat shortly. You can also email us at support@aitalk247.com.',
+    'Connecting you to a support agent now\u2026 \ud83d\ude4b\n\nOur team is available **Mon\u2013Sat, 10am\u20137pm IST**. An agent will join this chat shortly. You can also email us at atishayjain54@gmail.com.',
 }
 
 function buildOrderReply(
@@ -77,7 +79,7 @@ function buildOrderReply(
     const oid = o.id.slice(0, 8).toUpperCase()
     const emoji = statusEmoji[o.status] ?? '📦'
     const date = new Date(o.created_at).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })
-    return `${i + 1}. **#${oid}** — ${o.status} ${emoji} (${date}) — $${Number(o.total).toLocaleString('en-US')}`
+    return `${i + 1}. **#${oid}** — ${o.status} ${emoji} (${date}) — ₹${Number(o.total).toLocaleString('en-IN')}`
   })
 
   return `Here are your recent orders:\n\n${lines.join('\n')}\n\nFor full details, visit **My Orders** in your account. Type "track" for tracking info. 📋`
@@ -85,13 +87,26 @@ function buildOrderReply(
 
 // ── Main handler ──────────────────────────────────────────
 export async function POST(req: NextRequest) {
+  const csrf = assertSameOrigin(req)
+  if (csrf) return csrf
+
+  const limited = await rateLimit(req, 'default')
+  if (limited) return limited
+
   let body: any
   try { body = await req.json() } catch { return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 }) }
 
-  const { session_id, message, user_id } = body
+  const { session_id, message } = body
   if (!session_id || !message) {
     return NextResponse.json({ error: 'session_id and message are required' }, { status: 400 })
   }
+
+  // Resolve user_id from the authenticated session — never trust the request body.
+  // Unauthenticated users get null (guest chat still works, just no order lookup).
+  const { createServerClient } = await import('@/lib/supabase/server')
+  const serverClient = await createServerClient()
+  const { data: { user: authedUser } } = await serverClient.auth.getUser()
+  const user_id = authedUser?.id ?? null
 
   const supabase = createAdminClient()
 
@@ -141,7 +156,7 @@ export async function POST(req: NextRequest) {
   } else if (isFallback) {
     const botCount = secondaryData as number
     replyText = botCount >= 2
-      ? 'I wasn\'t able to fully understand your question. Let me connect you with a support agent who can help better. \ud83d\ude4b\n\nType "agent" anytime to reach a human directly, or email us at support@aitalk247.com.'
+      ? 'I wasn\'t able to fully understand your question. Let me connect you with a support agent who can help better. \ud83d\ude4b\n\nType "agent" anytime to reach a human directly, or email us at atishayjain54@gmail.com.'
       : 'I\'m not sure I understand that. Could you rephrase?\n\nI can help with: **order status**, **tracking**, **returns**, **shipping**, **payments**, or **account issues**. Type "agent" to reach a human. \ud83e\udd16'
   } else {
     replyText = STATIC_REPLIES[intent] ?? STATIC_REPLIES.fallback!

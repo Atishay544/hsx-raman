@@ -12,19 +12,25 @@ import {
   Star,
   MessageSquare,
   Image as ImageIcon,
+  BadgePercent,
+  Truck,
+  BarChart2,
 } from 'lucide-react'
 
 const navLinks = [
-  { href: '/admin/dashboard',      label: 'Dashboard',      icon: LayoutDashboard },
-  { href: '/admin/products',       label: 'Products',        icon: Package },
-  { href: '/admin/orders',         label: 'Orders',          icon: ShoppingCart },
-  { href: '/admin/customers',      label: 'Customers',       icon: Users },
-  { href: '/admin/categories',     label: 'Categories',      icon: Tag },
-  { href: '/admin/banners',        label: 'Banners',         icon: ImageIcon },
-  { href: '/admin/coupons',        label: 'Coupons',         icon: Ticket },
-  { href: '/admin/announcements',  label: 'Announcements',   icon: Megaphone },
-  { href: '/admin/reviews',        label: 'Reviews',         icon: Star },
-  { href: '/admin/chat',           label: 'Chat Support',    icon: MessageSquare },
+  { href: '/admin/dashboard',          label: 'Dashboard',        icon: LayoutDashboard },
+  { href: '/admin/products',           label: 'Products',          icon: Package },
+  { href: '/admin/orders',             label: 'Orders',            icon: ShoppingCart },
+  { href: '/admin/delivery',           label: 'Delivery Analytics', icon: BarChart2 },
+  { href: '/admin/delivery-partners',  label: 'Carriers',          icon: Truck },
+  { href: '/admin/customers',          label: 'Customers',         icon: Users },
+  { href: '/admin/categories',         label: 'Categories',      icon: Tag },
+  { href: '/admin/banners',            label: 'Banners',         icon: ImageIcon },
+  { href: '/admin/offers',             label: 'Offers',          icon: BadgePercent },
+  { href: '/admin/coupons',            label: 'Coupons',         icon: Ticket },
+  { href: '/admin/announcements',      label: 'Announcements',   icon: Megaphone },
+  { href: '/admin/reviews',            label: 'Reviews',         icon: Star },
+  { href: '/admin/chat',               label: 'Chat Support',    icon: MessageSquare },
 ]
 
 export default function AdminNav() {

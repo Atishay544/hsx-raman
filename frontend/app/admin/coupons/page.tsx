@@ -1,19 +1,13 @@
-import { createAdminClient } from '@/lib/supabase/admin'
 import { requireAdmin } from '@/lib/admin-auth'
+import { getAdminCoupons } from '@/lib/admin-data'
 import CouponActions from './CouponActions'
 import CouponForm from './CouponForm'
 
 export const metadata = { title: 'Coupons' }
 
 export default async function CouponsPage() {
-  const supabase = createAdminClient()
-
   await requireAdmin()
-
-  const { data: coupons } = await supabase
-    .from('coupons')
-    .select('id, code, type, value, min_order, uses_count, max_uses, expires_at, is_active')
-    .order('created_at', { ascending: false })
+  const coupons = await getAdminCoupons()
 
   return (
     <div className="space-y-8">
@@ -53,9 +47,9 @@ export default async function CouponsPage() {
                       <td className="px-4 py-3 text-gray-600">
                         {coupon.type === 'percentage'
                           ? `${coupon.value}%`
-                          : `$${Number(coupon.value).toLocaleString('en-US')}`}
+                          : `₹${Number(coupon.value).toLocaleString('en-IN')}`}
                         {coupon.min_order
-                          ? <span className="text-xs text-gray-400 ml-1">(min ${Number(coupon.min_order).toLocaleString('en-US')})</span>
+                          ? <span className="text-xs text-gray-400 ml-1">(min ₹{Number(coupon.min_order).toLocaleString('en-IN')})</span>
                           : null}
                       </td>
                       <td className="px-4 py-3 text-right text-gray-600">

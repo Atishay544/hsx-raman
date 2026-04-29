@@ -1,19 +1,13 @@
-import { createAdminClient } from '@/lib/supabase/admin'
 import { requireAdmin } from '@/lib/admin-auth'
+import { getAdminCategories } from '@/lib/admin-data'
 import CategoryActions from './CategoryActions'
 import CategoryForm from './CategoryForm'
 
 export const metadata = { title: 'Categories' }
 
 export default async function CategoriesPage() {
-  const supabase = createAdminClient()
-
   await requireAdmin()
-
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('id, name, slug, parent_id, sort_order, categories!parent_id(name)')
-    .order('sort_order', { ascending: true })
+  const categories = await getAdminCategories()
 
   return (
     <div>
@@ -43,7 +37,14 @@ export default async function CategoriesPage() {
                     {(cat.categories as any)?.name ?? '—'}
                   </td>
                   <td className="px-5 py-3 text-right">
-                    <CategoryActions categoryId={cat.id} categoryName={cat.name} />
+                    <CategoryActions
+                      categoryId={cat.id}
+                      categoryName={cat.name}
+                      categorySlug={cat.slug}
+                      parentId={cat.parent_id ?? null}
+                      sortOrder={cat.sort_order ?? 0}
+                      categories={categories?.map(c => ({ id: c.id, name: c.name })) ?? []}
+                    />
                   </td>
                 </tr>
               ))}

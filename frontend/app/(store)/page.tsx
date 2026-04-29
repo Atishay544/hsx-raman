@@ -1,13 +1,14 @@
-import { createServerClient } from '@/lib/supabase/server'
 import { createPublicClient } from '@/lib/supabase/admin'
 import { unstable_cache } from 'next/cache'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatPrice } from '@/lib/utils'
-import HeroCarousel from './HeroCarousel'
-import { AnimatedGrid, AnimatedItem } from './AnimatedSection'
+import { AnimatedGrid, AnimatedItem } from './AnimatedSectionDynamic'
 
-export const revalidate = 60
+const HeroCarousel = dynamic(() => import('./HeroCarousel'), { ssr: true })
+
+export const revalidate = 600
 
 const getStaticHomeData = unstable_cache(
   async () => {
@@ -35,34 +36,90 @@ const getStaticHomeData = unstable_cache(
     return { banners, categories }
   },
   ['home-static'],
-  { revalidate: 60, tags: ['banners', 'categories'] }
+  { revalidate: 600, tags: ['banners', 'categories'] }
+)
+
+type HomeProduct = { id: string; name: string; slug: string; price: number; compare_price: number | null; images: string[] | null }
+
+const getDynamicHomeProducts = unstable_cache(
+  async (): Promise<{ featured: HomeProduct[]; deals: HomeProduct[] }> => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      return { featured: [], deals: [] }
+    }
+    const supabase = createPublicClient()
+    const [{ data: featured }, { data: deals }] = await Promise.all([
+      supabase
+        .from('products')
+        .select('id,name,slug,price,compare_price,images')
+        .eq('is_active', true)
+        .order('created_at', { ascending: false })
+        .limit(8),
+      supabase
+        .from('products')
+        .select('id,name,slug,price,compare_price,images')
+        .eq('is_active', true)
+        .not('compare_price', 'is', null)
+        .order('created_at', { ascending: false })
+        .limit(8),
+    ])
+    return { featured: featured ?? [], deals: deals ?? [] }
+  },
+  ['home-products'],
+  { revalidate: 600, tags: ['products'] }
 )
 
 export default async function HomePage() {
   const { banners, categories } = await getStaticHomeData()
-
-  const supabase = await createServerClient()
-  const [{ data: featured }, { data: deals }] = await Promise.all([
-    supabase
-      .from('products')
-      .select('id,name,slug,price,compare_price,images')
-      .eq('is_active', true)
-      .order('created_at', { ascending: false })
-      .limit(8),
-    supabase
-      .from('products')
-      .select('id,name,slug,price,compare_price,images')
-      .eq('is_active', true)
-      .not('compare_price', 'is', null)
-      .order('created_at', { ascending: false })
-      .limit(8),
-  ])
+  const { featured, deals } = await getDynamicHomeProducts()
 
   const heroSlides = banners.filter(b => b.sort_order === 0)
   const dealBanner = banners.find(b => b.sort_order === 1) ?? null
 
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.layerfactory.in'
+  const homeJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${BASE_URL}/#webpage`,
+        url: BASE_URL,
+        name: 'Layers Factory — Premium Marble Temples & Spiritual Decor India',
+        description: 'Buy premium handcrafted marble temples, divine sculptures (Ganesh, Lakshmi, Shiva) and spiritual home decor online. Free shipping above ₹499.',
+        isPartOf: { '@id': `${BASE_URL}/#website` },
+        about: { '@id': `${BASE_URL}/#organization` },
+        inLanguage: 'en-IN',
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: [
+          {
+            '@type': 'Question',
+            name: 'What is Layers Factory?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Layers Factory (layerfactory.in) is an Indian e-commerce store specialising in premium handcrafted marble temples (mandirs), divine deity sculptures — Ganesh, Lakshmi, Shiva, Durga, Krishna — and spiritual home decor. Every product is shipped pan-India.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'Do you offer free shipping?',
+            acceptedAnswer: { '@type': 'Answer', text: 'Yes. Free shipping on all orders above ₹499 across India.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'What payment methods are accepted?',
+            acceptedAnswer: { '@type': 'Answer', text: 'We accept UPI, credit/debit cards, net banking, and Cash on Delivery (COD) via Razorpay.' },
+          },
+          {
+            '@type': 'Question',
+            name: 'What is the return policy?',
+            acceptedAnswer: { '@type': 'Answer', text: '7-day hassle-free returns. Contact support@aitalk247.com with your order ID.' },
+          },
+        ],
+      },
+    ],
+  }
+
   return (
     <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }} />
       {/* ── Hero Carousel — full bleed ── */}
       <HeroCarousel banners={heroSlides} />
 
@@ -100,9 +157,9 @@ export default async function HomePage() {
         <section className="max-w-350 mx-auto px-4 sm:px-6 lg:px-10 pb-14">
           <SectionHeader title="Featured Products" href="/products" linkLabel="View all →" />
           <AnimatedGrid className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 mt-7">
-            {featured.map(p => (
+            {featured.map((p, i) => (
               <AnimatedItem key={p.id}>
-                <ProductCard product={p} />
+                <ProductCard product={p} priority={i < 4} />
               </AnimatedItem>
             ))}
           </AnimatedGrid>
@@ -113,8 +170,9 @@ export default async function HomePage() {
       {deals && deals.length > 0 && (
         <section className="max-w-350 mx-auto px-4 sm:px-6 lg:px-10 pb-14">
           <div
-            className={`relative overflow-hidden rounded-2xl min-h-50 flex flex-col sm:flex-row items-center justify-between gap-6 px-8 sm:px-12 py-10 ${dealBanner ? '' : 'bg-linear-to-r from-rose-500 to-orange-400'
-              }`}
+            className={`relative overflow-hidden rounded-2xl min-h-50 flex flex-col sm:flex-row items-center justify-between gap-6 px-8 sm:px-12 py-10 ${
+              dealBanner ? '' : 'bg-linear-to-r from-rose-500 to-orange-400'
+            }`}
             style={dealBanner ? { backgroundColor: dealBanner.bg_color ?? '#111827' } : undefined}
           >
             {dealBanner?.image_url && (
@@ -178,10 +236,11 @@ function SectionHeader({ title, href, linkLabel }: { title: string; href?: strin
 }
 
 // ── Product Card ──────────────────────────────────────────────────────────────
-function ProductCard({ product }: {
+function ProductCard({ product, priority = false }: {
   product: { id: string; name: string; slug: string; price: number; compare_price: number | null; images: string[] | null }
+  priority?: boolean
 }) {
-  const image = product.images?.[0]
+  const image    = product.images?.[0]
   const discount = product.compare_price
     ? Math.round((1 - product.price / product.compare_price) * 100)
     : 0
@@ -197,6 +256,7 @@ function ProductCard({ product }: {
             fill
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-cover group-hover:scale-105 transition-transform duration-500"
+            priority={priority}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-300 text-5xl">📦</div>
@@ -212,10 +272,10 @@ function ProductCard({ product }: {
           {product.name}
         </p>
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-bold text-sm text-gray-900">{formatPrice(product.price, 'GBP')}</span>
+          <span className="font-bold text-sm text-gray-900">{formatPrice(product.price)}</span>
           {product.compare_price && (
             <span className="text-xs text-gray-400 line-through">
-              {formatPrice(product.compare_price, 'GBP')}
+              {formatPrice(product.compare_price)}
             </span>
           )}
         </div>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { createAdminClient } from '@/lib/supabase/admin'
+import Image from 'next/image'
 import { requireAdmin } from '@/lib/admin-auth'
+import { getAdminProducts } from '@/lib/admin-data'
 import ProductActions from './ProductActions'
 
 export const metadata = { title: 'Products' }
@@ -12,36 +13,17 @@ interface PageProps {
 }
 
 export default async function ProductsPage({ searchParams }: PageProps) {
-  const supabase = createAdminClient()
-
   await requireAdmin()
 
-  const params = await searchParams
-  const q = params.q?.trim() ?? ''
+  const params         = await searchParams
+  const q              = params.q?.trim() ?? ''
   const categoryFilter = params.category ?? ''
-  const page = Math.max(1, parseInt(params.page ?? '1', 10))
-  const from = (page - 1) * PAGE_SIZE
-  const to = from + PAGE_SIZE - 1
+  const page           = Math.max(1, parseInt(params.page ?? '1', 10))
+  const from           = (page - 1) * PAGE_SIZE
 
-  // Fetch categories for filter dropdown
-  const { data: categories } = await supabase
-    .from('categories')
-    .select('id, name')
-    .order('name')
+  const { categories, products, count } = await getAdminProducts(q, categoryFilter, page)
 
-  // Build query
-  let query = supabase
-    .from('products')
-    .select('id, name, price, stock, is_active, category_id, categories(name)', { count: 'exact' })
-    .order('created_at', { ascending: false })
-    .range(from, to)
-
-  if (q) query = query.ilike('name', `%${q}%`)
-  if (categoryFilter) query = query.eq('category_id', categoryFilter)
-
-  const { data: products, count } = await query
-
-  const totalPages = Math.ceil((count ?? 0) / PAGE_SIZE)
+  const totalPages = Math.ceil(count / PAGE_SIZE)
 
   return (
     <div>
@@ -108,15 +90,30 @@ export default async function ProductsPage({ searchParams }: PageProps) {
               {products?.map(product => (
                 <tr key={product.id} className="border-b border-gray-100 hover:bg-gray-50">
                   <td className="px-4 py-3">
-                    <Link href={`/admin/products/${product.id}`} className="font-medium text-gray-900 hover:text-blue-600">
-                      {product.name}
+                    <Link href={`/admin/products/${product.id}`} className="flex items-center gap-3 group">
+                      <div className="w-10 h-10 rounded-lg overflow-hidden bg-gray-100 shrink-0 border border-gray-200">
+                        {(product as any).images?.[0] ? (
+                          <Image
+                            src={(product as any).images[0]}
+                            alt={product.name}
+                            width={40}
+                            height={40}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-lg text-gray-300">📦</div>
+                        )}
+                      </div>
+                      <span className="font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
+                        {product.name}
+                      </span>
                     </Link>
                   </td>
                   <td className="px-4 py-3 text-gray-500">
                     {(product.categories as any)?.name ?? '—'}
                   </td>
                   <td className="px-4 py-3 text-right font-medium text-gray-900">
-                    ${Number(product.price).toLocaleString('en-US')}
+                    ₹{Number(product.price).toLocaleString('en-IN')}
                   </td>
                   <td className="px-4 py-3 text-right">
                     <span className={product.stock < 10 ? 'text-red-600 font-semibold' : 'text-gray-700'}>

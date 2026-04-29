@@ -1,22 +1,12 @@
+import { adminGuard } from '@/lib/security/admin-guard'
 import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabase/admin'
-import { createServerClient } from '@/lib/supabase/server'
+import { revalidateTag } from 'next/cache'
 
-async function requireAdmin() {
-  const supabase = await createServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return null
-  const admin = createAdminClient()
-  // Fast-path: role in JWT app_metadata avoids a DB round-trip
-  if (user.app_metadata?.role === 'admin') return admin
-  const { data: profile } = await admin.from('profiles').select('role').eq('id', user.id).single()
-  if (profile?.role !== 'admin') return null
-  return admin
-}
 
 export async function POST(req: NextRequest) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  const guard = await adminGuard(req)
+  if (guard instanceof NextResponse) return guard
+  const { admin } = guard
 
   const body = await req.json()
   const { variants, ...productData } = body
@@ -30,6 +20,7 @@ export async function POST(req: NextRequest) {
       price:         parseFloat(productData.price),
       compare_price: productData.compare_price ? parseFloat(productData.compare_price) : null,
       stock:         parseInt(productData.stock, 10),
+      weight_grams:  parseInt(productData.weight_grams, 10) || 500,
       category_id:   productData.category_id || null,
       is_active:     productData.is_active ?? true,
       images:        productData.images ?? [],
@@ -54,12 +45,14 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  revalidateTag('products'); revalidateTag('admin-products'); revalidateTag('admin-dashboard')
   return NextResponse.json({ data: product })
 }
 
 export async function PATCH(req: NextRequest) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  const guard = await adminGuard(req)
+  if (guard instanceof NextResponse) return guard
+  const { admin } = guard
 
   const body = await req.json()
   const { id, variants, ...fields } = body
@@ -73,6 +66,7 @@ export async function PATCH(req: NextRequest) {
   if (fields.price         !== undefined) payload.price         = parseFloat(fields.price)
   if (fields.compare_price !== undefined) payload.compare_price = fields.compare_price ? parseFloat(fields.compare_price) : null
   if (fields.stock         !== undefined) payload.stock         = parseInt(fields.stock, 10)
+  if (fields.weight_grams  !== undefined) payload.weight_grams  = parseInt(fields.weight_grams, 10) || 500
   if (fields.category_id   !== undefined) payload.category_id   = fields.category_id || null
   if (fields.is_active     !== undefined) payload.is_active     = fields.is_active
   if (fields.images        !== undefined) payload.images        = fields.images
@@ -102,15 +96,18 @@ export async function PATCH(req: NextRequest) {
     await admin.from('product_variants').insert(variantRows)
   }
 
+  revalidateTag('products'); revalidateTag('admin-products'); revalidateTag('admin-dashboard')
   return NextResponse.json({ success: true })
 }
 
 export async function DELETE(req: NextRequest) {
-  const admin = await requireAdmin()
-  if (!admin) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  const guard = await adminGuard(req)
+  if (guard instanceof NextResponse) return guard
+  const { admin } = guard
 
   const { id } = await req.json()
   const { error } = await admin.from('products').delete().eq('id', id)
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
+  revalidateTag('products'); revalidateTag('admin-products'); revalidateTag('admin-dashboard')
   return NextResponse.json({ success: true })
 }

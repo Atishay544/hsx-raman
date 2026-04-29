@@ -3,7 +3,9 @@ import { createPublicClient } from '@/lib/supabase/admin'
 import Header from '@/components/storefront/Header'
 import Footer from '@/components/storefront/Footer'
 import AnnouncementBar from '@/components/storefront/AnnouncementBar'
-import ChatWidget from '@/components/chat/ChatWidget'
+import ChatWidgetLoader from '@/components/chat/ChatWidgetLoader'
+import VisitorTracker from '@/components/storefront/VisitorTracker'
+import WelcomePopup from '@/components/storefront/WelcomePopup'
 
 // Cached for 60s — categories/announcements rarely change
 const getLayoutData = unstable_cache(
@@ -32,7 +34,7 @@ const getLayoutData = unstable_cache(
     return { announcement: announcements?.[0] ?? null, categories }
   },
   ['layout-data'],
-  { revalidate: 60 }
+  { revalidate: 3600, tags: ['announcements', 'categories'] }
 )
 
 export default async function StoreLayout({ children }: { children: React.ReactNode }) {
@@ -53,7 +55,9 @@ export default async function StoreLayout({ children }: { children: React.ReactN
       <Header categories={roots} />
       <main className="flex-1">{children}</main>
       <Footer categories={roots} />
-      <ChatWidget />
+      <ChatWidgetLoader />
+      <VisitorTracker />
+      <WelcomePopup />
     </div>
   )
 }

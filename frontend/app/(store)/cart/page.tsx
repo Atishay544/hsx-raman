@@ -44,7 +44,7 @@ export default function CartPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-medium truncate">{item.name}</p>
-                <p className="text-sm text-gray-500 mt-0.5">{formatPrice(item.price, 'GBP')} each</p>
+                <p className="text-sm text-gray-500 mt-0.5">{formatPrice(item.price)} each</p>
                 <div className="flex items-center gap-3 mt-2">
                   <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
                     <button onClick={() => updateQuantity(item.id, item.quantity - 1)}
@@ -59,7 +59,7 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="text-right">
-                <p className="font-bold">{formatPrice(item.price * item.quantity, 'GBP')}</p>
+                <p className="font-bold">{formatPrice(item.price * item.quantity)}</p>
               </div>
             </div>
           ))}
@@ -71,7 +71,7 @@ export default function CartPage() {
           <div className="space-y-2 text-sm mb-4">
             <div className="flex justify-between">
               <span className="text-gray-600">Subtotal</span>
-              <span>{formatPrice(total(), 'GBP')}</span>
+              <span>{formatPrice(total())}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Shipping</span>
@@ -80,9 +80,9 @@ export default function CartPage() {
           </div>
           <div className="border-t pt-3 flex justify-between font-bold text-base mb-5">
             <span>Total</span>
-            <span>{formatPrice(total(), 'GBP')}</span>
+            <span>{formatPrice(total())}</span>
           </div>
-          <Link href="/checkout"
+          <Link href="/checkout" prefetch={false}
             className="block w-full bg-black text-white text-center py-3.5 rounded-xl font-semibold hover:bg-gray-800 transition">
             Proceed to Checkout
           </Link>
