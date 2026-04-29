@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const ALLOWED_ORIGINS = new Set([
-  process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.layerfactory.in',
+  process.env.NEXT_PUBLIC_APP_URL ?? 'https://highstreetexpresss.vercel.app',
+  // Vercel sets VERCEL_URL automatically (no https:// prefix)
+  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+  'https://highstreetexpresss.vercel.app',
   'http://localhost:3000',
   'http://localhost:3001',
-])
+].filter(Boolean) as string[])
 
 /**
  * Validates that the request Origin matches our app domain.
