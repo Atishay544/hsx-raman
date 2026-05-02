@@ -65,7 +65,10 @@ function LoginContent() {
 
   async function handleEmailOtp() {
     setLoading(true); setError('')
-    const { error } = await supabase.auth.signInWithOtp({ email })
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: `${location.origin}/auth/callback?next=${encodeURIComponent(redirectTo)}` },
+    })
     setLoading(false)
     if (error) return setError(error.message)
     setStep('otp')
