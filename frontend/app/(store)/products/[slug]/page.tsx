@@ -501,45 +501,37 @@ export default async function ProductDetailPage({ params }: Props) {
           </div>
 
           {/* Delivery timeline */}
-          {(() => {
-            const today    = new Date()
-            const d = (n: number) => {
-              const d = new Date(today.getTime() + n * 86400000)
-              return d.toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })
-            }
-            return (
-              <div className="border-t border-gray-100 pt-4">
-                <div className="flex items-start gap-0">
-                  {[
-                    { label: 'Order Placed', date: d(0), done: true },
-                    { label: 'Processing', date: `${d(1)}–${d(2)}`, done: false },
-                    { label: 'Dispatched', date: `${d(2)}–${d(3)}`, done: false },
-                    { label: 'Delivered', date: `${d(4)}–${d(6)}`, done: false },
-                  ].map((step, i, arr) => (
-                    <div key={step.label} className="flex items-start flex-1">
-                      <div className="flex flex-col items-center flex-1">
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
-                          step.done ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-500'
-                        }`}>
-                          {step.done ? '✓' : i + 1}
-                        </div>
-                        <p className="text-[10px] font-medium text-gray-700 mt-1 text-center leading-tight">{step.label}</p>
-                        <p className="text-[9px] text-gray-400 text-center">{step.date}</p>
-                      </div>
-                      {i < arr.length - 1 && (
-                        <div className={`h-0.5 flex-1 mt-2.5 ${step.done ? 'bg-gray-900' : 'bg-gray-200'}`} />
-                      )}
+          <div className="border-t border-gray-100 pt-4">
+            <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-3">⚡ 10-Minute Delivery</p>
+            <div className="flex items-start gap-0">
+              {[
+                { label: 'Order Placed', time: 'Now',     done: true  },
+                { label: 'Preparing',    time: '2–3 min', done: false },
+                { label: 'On the Way',   time: '5–7 min', done: false },
+                { label: 'Delivered',    time: '10 min',  done: false },
+              ].map((step, i, arr) => (
+                <div key={step.label} className="flex items-start flex-1">
+                  <div className="flex flex-col items-center flex-1">
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold shrink-0 ${
+                      step.done ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-500'
+                    }`}>
+                      {step.done ? '✓' : i + 1}
                     </div>
-                  ))}
+                    <p className="text-[10px] font-medium text-gray-700 mt-1 text-center leading-tight">{step.label}</p>
+                    <p className="text-[9px] text-gray-400 text-center">{step.time}</p>
+                  </div>
+                  {i < arr.length - 1 && (
+                    <div className={`h-0.5 flex-1 mt-2.5 ${step.done ? 'bg-gray-900' : 'bg-gray-200'}`} />
+                  )}
                 </div>
-              </div>
-            )
-          })()}
+              ))}
+            </div>
+          </div>
 
           {/* Handcrafted quality badge */}
           <div className="flex items-center gap-3 bg-amber-50 border border-amber-100 rounded-xl px-4 py-3">
             <Award size={16} className="text-amber-600 shrink-0" />
-            <span className="text-xs text-amber-800 font-medium leading-tight">Handcrafted in India · Premium artisan quality · Every piece is unique</span>
+            <span className="text-xs text-amber-800 font-medium leading-tight">Fresh & quality guaranteed · Delivered hot in 10 minutes · Every order made with care</span>
           </div>
 
           {/* Description */}
