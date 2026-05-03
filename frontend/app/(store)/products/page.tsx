@@ -13,12 +13,12 @@ export const revalidate = 30
 export async function generateMetadata() {
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.layerfactory.in'
   return {
-    title: 'All Products — Fashion & Lifestyle | HighStreetExpress',
-    description: 'Browse our full collection of premium fashion & lifestyle products. 10-minute delivery. Free delivery above £20.',
+    title: 'Menu — Food & Groceries | HighStreetExpress',
+    description: 'Browse our full menu of fresh food, hot meals & groceries. 10-minute delivery. Free delivery above £20.',
     alternates: { canonical: `${BASE_URL}/products` },
     openGraph: {
-      title: 'All Products — HighStreetExpress',
-      description: 'Browse premium fashion & lifestyle products. 10-minute delivery. Free delivery above £20.',
+      title: 'Menu — HighStreetExpress',
+      description: 'Browse fresh food, hot meals & groceries. 10-minute delivery. Free delivery above £20.',
       url: `${BASE_URL}/products`,
       type: 'website',
       siteName: 'HighStreetExpress',

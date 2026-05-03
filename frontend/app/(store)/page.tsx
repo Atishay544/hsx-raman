@@ -87,8 +87,8 @@ export default async function HomePage() {
         '@type': 'WebPage',
         '@id': `${BASE_URL}/#webpage`,
         url: BASE_URL,
-        name: 'HighStreetExpress — 10-Minute Fashion Delivery UK',
-        description: 'Order premium fashion & lifestyle products and get them delivered to your door in 10 minutes. Free delivery above £20.',
+        name: 'HighStreetExpress — 10-Minute Food Delivery UK',
+        description: 'Order fresh food, hot meals & groceries and get them delivered to your door in 10 minutes. Free delivery above £20.',
         isPartOf: { '@id': `${BASE_URL}/#website` },
         about: { '@id': `${BASE_URL}/#organization` },
         inLanguage: 'en-GB',
@@ -99,7 +99,7 @@ export default async function HomePage() {
           {
             '@type': 'Question',
             name: 'What is HighStreetExpress?',
-            acceptedAnswer: { '@type': 'Answer', text: 'HighStreetExpress (HSX) is a UK ultra-fast fashion & lifestyle delivery service. We deliver premium fashion and accessories to your door in 10 minutes.' },
+            acceptedAnswer: { '@type': 'Answer', text: 'HighStreetExpress (HSX) is a UK 10-minute food delivery app. We deliver fresh food, hot meals and groceries to your door in 10 minutes.' },
           },
           {
             '@type': 'Question',

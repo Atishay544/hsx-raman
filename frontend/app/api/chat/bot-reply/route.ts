@@ -37,7 +37,7 @@ const STATIC_REPLIES: Partial<Record<Intent, string>> = {
   refund:
     'For returns and refunds:\n\n\u2022 We accept returns within **30 days** of delivery\n\u2022 Items must be unused and in original packaging\n\u2022 Refunds are processed in 3\u20135 business days\n\nTo initiate a return, log in \u2192 My Orders \u2192 select order \u2192 Request Return.\n\nNeed more help? Type "agent" to chat with our team. \ud83d\udce6',
   shipping:
-    'Here\'s our delivery info:\n\n\u2022 \u26a1 **10-minute delivery** to your door\n\u2022 **Free delivery** on orders above \u00a320\n\u2022 Orders below \u00a320: flat \u00a32.99 delivery fee\n\u2022 Available in select UK postcodes\n\nOnce you place your order, a rider is dispatched immediately. \ud83d\ude9a',
+    'Here\'s our delivery info:\n\n\u2022 \u26a1 **10-minute delivery** \u2014 fresh food at your door\n\u2022 **Free delivery** on orders above \u00a320\n\u2022 Orders below \u00a320: flat \u00a32.99 delivery fee\n\u2022 Available in select UK postcodes\n\nOnce you place your order, a rider is dispatched immediately. \ud83d\udef5',
   payment:
     'We accept all major credit/debit cards, UPI (GPay, PhonePe, Paytm), and net banking \u2014 all secured by Razorpay.\n\nIf your payment failed but money was deducted, it will automatically refund within 5\u20137 business days. For urgent help, type "agent". \ud83d\udcb3',
   account:

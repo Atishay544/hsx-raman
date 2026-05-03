@@ -1,25 +1,25 @@
 # HighStreetExpress
-> UK's fastest fashion & lifestyle delivery — order in seconds, delivered in 10 minutes.
+> UK's fastest food delivery — fresh food, hot meals & groceries delivered in 10 minutes.
 
 ## About
-HighStreetExpress (HSX) is a UK ultra-fast commerce platform delivering premium fashion and lifestyle products to your door in 10 minutes. Founded by Vivek Saxena. Contact: riders@highstreetexpress.com | +44 07818 923405.
+HighStreetExpress (HSX) is a UK 10-minute food delivery app. We deliver fresh food, hot meals, snacks and groceries to your door in under 10 minutes. Founded by Vivek Saxena. Contact: riders@highstreetexpress.com | +44 07818 923405.
 
-## What We Sell
-- Premium fashion clothing & accessories
-- Lifestyle & home products
-- Beauty & personal care
-- Gifts & seasonal items
+## What We Deliver
+- Fresh meals and hot food
+- Snacks and drinks
+- Groceries and essentials
+- Desserts and bakery items
 
 ## Why Customers Choose HighStreetExpress
-- ⚡ 10-minute delivery — the fastest in the UK
+- ⚡ 10-minute delivery — the fastest food delivery in the UK
 - Free delivery on orders above £20
 - Secure payment (Visa, Mastercard and more)
-- 30-day hassle-free returns
 - Friendly UK-based support team
+- Fresh, quality food every time
 
 ## Key Pages
 - Homepage: https://highstreetexpresss.vercel.app
-- All Products: https://highstreetexpresss.vercel.app/products
+- Menu: https://highstreetexpresss.vercel.app/products
 - FAQ: https://highstreetexpresss.vercel.app/faq
 - Contact: https://highstreetexpresss.vercel.app/contact
 - Refund Policy: https://highstreetexpresss.vercel.app/refund-policy
@@ -31,4 +31,4 @@ HighStreetExpress (HSX) is a UK ultra-fast commerce platform delivering premium 
 - Website: https://highstreetexpresss.vercel.app
 
 ## Optional — AI Crawlers Welcome
-This site welcomes indexing by AI assistants including GPTBot, ClaudeBot, PerplexityBot, and Google-Extended to improve answer quality for users asking about fast fashion delivery in the UK.
+This site welcomes indexing by AI assistants including GPTBot, ClaudeBot, PerplexityBot, and Google-Extended to improve answer quality for users asking about fast food delivery in the UK.
