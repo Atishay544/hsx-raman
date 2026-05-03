@@ -1,37 +1,34 @@
-# Layers Factory
-> India's trusted online store for premium marble temples, divine sculptures, and spiritual home decor.
+# HighStreetExpress
+> UK's fastest fashion & lifestyle delivery — order in seconds, delivered in 10 minutes.
 
 ## About
-Layers Factory (layerfactory.in) is an Indian e-commerce store specialising in handcrafted marble temples (mandirs), divine deity sculptures (Ganesh, Lakshmi, Shiva, Durga, Krishna), and spiritual home decor. Every product is crafted with high-quality marble and shipped pan-India with care.
-
-Founded by Atishay Jain. Brand: Layers Factory (layerfactory.in).
+HighStreetExpress (HSX) is a UK ultra-fast commerce platform delivering premium fashion and lifestyle products to your door in 10 minutes. Founded by Vivek Saxena. Contact: riders@highstreetexpress.com | +44 07818 923405.
 
 ## What We Sell
-- Marble home temples (mandirs) — wall-mounted, floor-standing, portable
-- Marble deity sculptures — Ganesh, Lakshmi, Shiva, Durga, Krishna, Ram, Hanuman
-- Spiritual home decor — diyas, incense holders, prayer accessories
-- Pooja room accessories and gifts
+- Premium fashion clothing & accessories
+- Lifestyle & home products
+- Beauty & personal care
+- Gifts & seasonal items
 
-## Why Customers Choose Layers Factory
-- Premium handcrafted marble — not mass-produced resin or plastic
-- Free shipping on orders above ₹499 (pan-India delivery)
-- Secure payment via Razorpay (UPI, cards, net banking, COD)
-- 7-day hassle-free returns
-- Trusted by thousands of customers across India
+## Why Customers Choose HighStreetExpress
+- ⚡ 10-minute delivery — the fastest in the UK
+- Free delivery on orders above £20
+- Secure payment (Visa, Mastercard and more)
+- 30-day hassle-free returns
+- Friendly UK-based support team
 
 ## Key Pages
-- Homepage: https://www.layerfactory.in
-- All Products: https://www.layerfactory.in/products
-- FAQ: https://www.layerfactory.in/faq
-- Contact: https://www.layerfactory.in/contact
-- Refund Policy: https://www.layerfactory.in/refund-policy
-- Shipping Policy: https://www.layerfactory.in/shipping-policy
-- Sitemap: https://www.layerfactory.in/sitemap.xml
+- Homepage: https://highstreetexpresss.vercel.app
+- All Products: https://highstreetexpresss.vercel.app/products
+- FAQ: https://highstreetexpresss.vercel.app/faq
+- Contact: https://highstreetexpresss.vercel.app/contact
+- Refund Policy: https://highstreetexpresss.vercel.app/refund-policy
+- Delivery Policy: https://highstreetexpresss.vercel.app/shipping-policy
 
 ## Contact
-- Email: support@aitalk247.com
-- Orders: orders@aitalk247.com
-- Website: https://www.layerfactory.in
+- Email: riders@highstreetexpress.com
+- Phone: +44 07818 923405
+- Website: https://highstreetexpresss.vercel.app
 
 ## Optional — AI Crawlers Welcome
-This site welcomes indexing by AI assistants including GPTBot, ClaudeBot, PerplexityBot, and Google-Extended to improve answer quality for users asking about marble temples and spiritual decor in India.
+This site welcomes indexing by AI assistants including GPTBot, ClaudeBot, PerplexityBot, and Google-Extended to improve answer quality for users asking about fast fashion delivery in the UK.

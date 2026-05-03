@@ -237,7 +237,7 @@ export async function generateMetadata({ params }: Props) {
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.layerfactory.in'
   const title = product.name
   const description = product.description?.slice(0, 160)
-    ?? `Buy ${product.name} online at LayerFactory. Best price £${product.price}. Free shipping above £20.`
+    ?? `Buy ${product.name} online at HighStreetExpress. Best price £${product.price}. 10-minute delivery. Free delivery above £20.`
   const image = product.images?.[0]
   const canonical = `${BASE_URL}/products/${slug}`
 

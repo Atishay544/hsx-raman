@@ -13,15 +13,15 @@ export const revalidate = 30
 export async function generateMetadata() {
   const BASE_URL = process.env.NEXT_PUBLIC_APP_URL ?? 'https://www.layerfactory.in'
   return {
-    title: 'All Products — Marble Temples & Spiritual Decor | LayerFactory',
-    description: 'Browse our full collection of premium marble temples, divine sculptures (Ganesh, Lakshmi, Shiva) and spiritual home decor. Free shipping above ₹499.',
+    title: 'All Products — Fashion & Lifestyle | HighStreetExpress',
+    description: 'Browse our full collection of premium fashion & lifestyle products. 10-minute delivery. Free delivery above £20.',
     alternates: { canonical: `${BASE_URL}/products` },
     openGraph: {
-      title: 'All Products — LayerFactory',
-      description: 'Browse premium marble temples, divine sculptures and spiritual home decor. Free shipping above ₹499.',
+      title: 'All Products — HighStreetExpress',
+      description: 'Browse premium fashion & lifestyle products. 10-minute delivery. Free delivery above £20.',
       url: `${BASE_URL}/products`,
       type: 'website',
-      siteName: 'LayerFactory',
+      siteName: 'HighStreetExpress',
     },
   }
 }

@@ -42,7 +42,7 @@ export default function Footer({ categories = [] }: { categories?: Category[] })
               className="h-10 w-auto object-contain"
             />
           </Link>
-          <p className="text-sm leading-relaxed">Your trusted destination for premium fashion & lifestyle products. Fast UK delivery.</p>
+          <p className="text-sm leading-relaxed">Your trusted destination for premium fashion & lifestyle products. 10-minute delivery across the UK.</p>
           <div className="flex gap-3 mt-4">
             {socials.map(s => (
               <a key={s.label} href={s.href}

@@ -25,19 +25,19 @@ export const FAQS = [
     items: [
       {
         q: 'How long does delivery take?',
-        a: 'Metro cities: 1–3 business days. Tier-2/3 cities: 3–5 business days. Remote areas: 5–8 business days. See our full Shipping Policy for details.',
+        a: 'We deliver in 10 minutes to your door within our service areas. Once you place your order, a rider is dispatched immediately. See our Shipping Policy for full details.',
       },
       {
-        q: 'Is shipping free?',
-        a: 'Yes! Shipping is free on all orders above £20. Orders below £20 have a flat shipping fee of £2.99.',
+        q: 'Is delivery free?',
+        a: 'Yes! Delivery is free on all orders above £20. Orders below £20 have a flat delivery fee of £2.99.',
       },
       {
-        q: 'Do you ship outside India?',
-        a: 'Currently we only ship within India. International shipping is on our roadmap — stay tuned!',
+        q: 'Which areas do you cover?',
+        a: 'We currently cover select postcodes across the UK. Enter your postcode at checkout to confirm availability in your area. We are expanding rapidly — more areas coming soon!',
       },
       {
         q: 'What if I miss the delivery?',
-        a: "Our courier partner will make up to 3 delivery attempts. After 3 missed attempts, the package is returned to us and we'll contact you to rearrange delivery.",
+        a: "Our rider will attempt to reach you once. If you're unavailable, they will wait briefly and contact you. If delivery cannot be completed, the order is returned and we'll arrange a re-delivery or full refund.",
       },
     ],
   },
