@@ -43,24 +43,24 @@ function fmt(n: number) {
 }
 
 // Brand colours
-const BRAND_BLACK  = [15,   15,  15]  as [number,number,number]
-const BRAND_ACCENT = [99,  102, 241]  as [number,number,number]  // indigo-500
-const GRAY_900     = [17,   24,  39]  as [number,number,number]
-const GRAY_600     = [75,   85,  99]  as [number,number,number]
-const GRAY_200     = [229, 231, 235]  as [number,number,number]
-const GRAY_50      = [249, 250, 251]  as [number,number,number]
-const GREEN_600    = [22,  163,  74]  as [number,number,number]
-const WHITE        = [255, 255, 255]  as [number,number,number]
+const BRAND_BLACK = [15, 15, 15] as [number, number, number]
+const BRAND_ACCENT = [99, 102, 241] as [number, number, number]  // indigo-500
+const GRAY_900 = [17, 24, 39] as [number, number, number]
+const GRAY_600 = [75, 85, 99] as [number, number, number]
+const GRAY_200 = [229, 231, 235] as [number, number, number]
+const GRAY_50 = [249, 250, 251] as [number, number, number]
+const GREEN_600 = [22, 163, 74] as [number, number, number]
+const WHITE = [255, 255, 255] as [number, number, number]
 
 export async function downloadInvoicePDF(order: InvoiceOrder) {
-  const { default: jsPDF }    = await import('jspdf')
+  const { default: jsPDF } = await import('jspdf')
   const { default: autoTable } = await import('jspdf-autotable')
 
-  const doc   = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
   const pageW = doc.internal.pageSize.getWidth()   // 210
   const pageH = doc.internal.pageSize.getHeight()  // 297
-  const orderId  = order.id.slice(0, 8).toUpperCase()
-  const addr     = order.shipping_address ?? {}
+  const orderId = order.id.slice(0, 8).toUpperCase()
+  const addr = order.shipping_address ?? {}
   const addrName = addr.name ?? addr.full_name ?? ''
 
   // ── 1. Top accent bar ────────────────────────────────────────────────────
@@ -76,14 +76,14 @@ export async function downloadInvoicePDF(order: InvoiceOrder) {
   doc.setFont('helvetica', 'bold')
   // Draw small brand pill background
   doc.roundedRect(14, HDR_TOP - 5, 52, 10, 2, 2, 'F')
-  doc.text('Layers Factory', 17, HDR_TOP + 1.5)
+  doc.text('HSX', 17, HDR_TOP + 1.5)
 
   // Sub-text below brand
   doc.setFontSize(7.5)
   doc.setFont('helvetica', 'normal')
   doc.setTextColor(...GRAY_600)
-  doc.text('www.layerfactory.in', 14, HDR_TOP + 9)
-  doc.text('support@aitalk247.com', 14, HDR_TOP + 14)
+  doc.text('www.HSX.com', 14, HDR_TOP + 9)
+  doc.text('riders@highstreetexpress.com', 14, HDR_TOP + 14)
 
   // INVOICE label (right)
   doc.setFontSize(26)
@@ -105,13 +105,13 @@ export async function downloadInvoicePDF(order: InvoiceOrder) {
 
   // ── 4. Two-column meta block ──────────────────────────────────────────────
   const META_Y = DIV1 + 7
-  const COL2   = 110  // right column x
+  const COL2 = 110  // right column x
 
   // Left: Invoice details
   const metaRows: [string, string][] = [
-    ['Invoice No.',  `#LF-${orderId}`],
-    ['Order Date',   new Date(order.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })],
-    ['Status',       order.status.toUpperCase().replace(/_/g, ' ')],
+    ['Invoice No.', `#LF-${orderId}`],
+    ['Order Date', new Date(order.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })],
+    ['Status', order.status.toUpperCase().replace(/_/g, ' ')],
   ]
   if (order.tracking_number) metaRows.push(['Tracking', order.tracking_number])
 
@@ -176,17 +176,17 @@ export async function downloadInvoicePDF(order: InvoiceOrder) {
     headStyles: {
       fillColor: BRAND_BLACK,
       textColor: WHITE,
-      fontSize:  8,
+      fontSize: 8,
       fontStyle: 'bold',
       cellPadding: { top: 4, bottom: 4, left: 4, right: 4 },
     },
     bodyStyles: {
-      fontSize:    8.5,
-      textColor:   GRAY_900,
+      fontSize: 8.5,
+      textColor: GRAY_900,
       cellPadding: { top: 3.5, bottom: 3.5, left: 4, right: 4 },
     },
     columnStyles: {
-      0: { cellWidth: 8,  halign: 'center' },
+      0: { cellWidth: 8, halign: 'center' },
       1: { cellWidth: 72 },
       2: { cellWidth: 26 },
       3: { cellWidth: 11, halign: 'center' },
@@ -201,12 +201,12 @@ export async function downloadInvoicePDF(order: InvoiceOrder) {
 
   // ── 6. Totals panel ────────────────────────────────────────────────────────
   const afterTable = (doc as any).lastAutoTable.finalY + 6
-  const BOX_W      = 80
-  const BOX_X      = pageW - 14 - BOX_W
-  let ty           = afterTable
+  const BOX_W = 80
+  const BOX_X = pageW - 14 - BOX_W
+  let ty = afterTable
 
   // Subtotal
-  function totLine(label: string, value: string, bold = false, color = GRAY_600 as [number,number,number]) {
+  function totLine(label: string, value: string, bold = false, color = GRAY_600 as [number, number, number]) {
     doc.setFont('helvetica', bold ? 'bold' : 'normal')
     doc.setFontSize(bold ? 9.5 : 8.5)
     doc.setTextColor(...color)
@@ -255,7 +255,7 @@ export async function downloadInvoicePDF(order: InvoiceOrder) {
       doc.roundedRect(stampX - 10, stampY - 7, 36, 11, 2, 2, 'S')
       doc.setFontSize(13)
       doc.text('PAID', stampX + 8, stampY + 0.5, { align: 'center' })
-    } catch {}
+    } catch { }
   }
 
   // ── 8. Footer ─────────────────────────────────────────────────────────────
@@ -269,13 +269,13 @@ export async function downloadInvoicePDF(order: InvoiceOrder) {
   doc.setFont('helvetica', 'bold')
   doc.setFontSize(8)
   doc.setTextColor(...BRAND_BLACK)
-  doc.text('Layers Factory', 14, FOOTER_Y)
+  doc.text('HSX', 14, FOOTER_Y)
 
   doc.setFont('helvetica', 'normal')
   doc.setFontSize(7)
   doc.setTextColor(...GRAY_600)
   doc.text('Thank you for your order! Returns accepted within 7 days.', 14, FOOTER_Y + 5)
-  doc.text('support@aitalk247.com  |  www.layerfactory.in/refund-policy', 14, FOOTER_Y + 10)
+  doc.text('riders@highstreetexpress.com  |  www.HSX.com/refund-policy', 14, FOOTER_Y + 10)
 
   doc.setTextColor(...GRAY_200)
   doc.text(`Generated on ${new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}`, pageW - 14, FOOTER_Y, { align: 'right' })
