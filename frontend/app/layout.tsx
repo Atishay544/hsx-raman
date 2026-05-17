@@ -141,9 +141,9 @@ const orgJsonLd = {
       "@type": "WebSite",
       "@id": `${BASE_URL}/#website`,
       url: BASE_URL,
-      name: "Layers Factory",
-      description: "India's #1 online store for premium handcrafted marble temples & divine sculptures. Free shipping above ₹499.",
-      inLanguage: "en-IN",
+      name: "HighStreetExpress",
+      description: "UK's fastest food delivery. Order fresh food, meals & groceries in seconds, delivered to your door in 10 minutes.",
+      inLanguage: "en-GB",
       publisher: { "@id": `${BASE_URL}/#organization` },
       potentialAction: [
         {

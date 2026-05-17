@@ -43,11 +43,11 @@ function baseLayout(body: string) {
 <table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:40px 16px">
 <table width="600" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)">
   <tr><td style="background:#000;padding:24px 32px">
-    <span style="color:#fff;font-size:20px;font-weight:700;letter-spacing:-0.5px">Layers Factory</span>
+    <span style="color:#fff;font-size:20px;font-weight:700;letter-spacing:-0.5px">HighStreetExpress</span>
   </td></tr>
   <tr><td style="padding:32px">${body}</td></tr>
   <tr><td style="background:#f9f9f9;padding:20px 32px;border-top:1px solid #eee;text-align:center">
-    <p style="margin:0;color:#999;font-size:12px">Layers Factory · Questions? Reply to this email or visit layersfactory.com</p>
+    <p style="margin:0;color:#999;font-size:12px">HighStreetExpress · Questions? Reply to this email or visit highstreetexpress.com</p>
   </td></tr>
 </table></td></tr></table>
 </body></html>`
